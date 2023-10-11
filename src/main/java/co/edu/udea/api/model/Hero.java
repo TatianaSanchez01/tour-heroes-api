@@ -19,6 +19,7 @@ public class Hero {
 
     public Hero() {
     }
+
     public Hero(Integer id, String name) {
         this.id = id;
         this.name = name;
