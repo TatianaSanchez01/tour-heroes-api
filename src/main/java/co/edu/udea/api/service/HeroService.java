@@ -23,6 +23,7 @@ public class HeroService {
         this.heroRepository = heroRepository;
         this.messages = messages;
     }
+
     public Hero getHero(Integer id){
         Optional<Hero> optionalHero = heroRepository.findById(id);
         if(!optionalHero.isPresent()){
@@ -37,4 +38,15 @@ public class HeroService {
     }
 
 
+    public Hero addHero(Hero hero) {
+        return heroRepository.save(hero);
+    }
+
+    public Hero updateHero(Hero hero) {
+        return heroRepository.save(hero);
+    }
+
+    public void deleteHero(Integer id) {
+        heroRepository.deleteById(id);
+    }
 }
