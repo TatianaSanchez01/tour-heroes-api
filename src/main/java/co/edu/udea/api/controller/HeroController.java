@@ -67,7 +67,7 @@ public class HeroController {
      * @param hero El héroe que se va a almacenar.
      * @return El héroe almacenado exitosamente.
      */
-    @PostMapping("")
+    @PostMapping()
     @ApiOperation(value = "Agregar un nuevo héroe", response = Hero.class)
     @ApiResponses(value= {
             @ApiResponse(code = 200, message = "Héroe almacenado exitosamente."),
@@ -130,7 +130,7 @@ public class HeroController {
             @ApiResponse(code = 404, message = "No existen héroes con ese nombre."),
             @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar buscar héroes por nombre. Por favor, intenta nuevamente más tarde."),
     })
-    public ResponseEntity<List<Hero>> searchHeroes(@PathVariable String name){
+    public ResponseEntity<List<Hero>> searchHeroes(@RequestParam String name){
         log.info("Rest request search heroes by name: {}", name);
         return ResponseEntity.ok(heroService.searchHeroes(name));
     }

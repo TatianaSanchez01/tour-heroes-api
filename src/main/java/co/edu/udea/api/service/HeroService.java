@@ -49,4 +49,9 @@ public class HeroService {
     public void deleteHero(Integer id) {
         heroRepository.deleteById(id);
     }
+
+    public List<Hero> searchHeroes(String name) {
+        List<Hero> heroesList = heroRepository.findByName(name);
+        return heroesList;
+    }
 }
