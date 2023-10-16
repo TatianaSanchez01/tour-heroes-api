@@ -2,9 +2,9 @@ package co.edu.udea.api.controller;
 
 import co.edu.udea.api.model.Hero;
 import co.edu.udea.api.service.HeroService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,18 +26,17 @@ public class HeroController {
     }
 
     /**
-     * Buscar heroe en la base de datos por id
-     * @param id
-     * @return Heroe
+     * Buscar un héroe en la base de datos por ID.
+     * @param id El ID del héroe que se va a buscar.
+     * @return El héroe encontrado.
      */
-
     @GetMapping("{id}")
-    @ApiOperation(value = "Buscar un heroes por su id", response = Hero.class)
+    @Operation(summary = "Buscar un heroes por su id", description = "Busca un héroe en la base de datos por su ID.")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Héroe encontrado exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. Asegúrate de proporcionar un ID válido para buscar al héroe."),
-            @ApiResponse(code = 404, message = "Héroe no encontrado. No se encontró un héroe con el ID especificado en la base de datos."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar buscar al héroe. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroe encontrado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. Asegúrate de proporcionar un ID válido para buscar al héroe."),
+            @ApiResponse(responseCode = "404", description = "Héroe no encontrado. No se encontró un héroe con el ID especificado en la base de datos."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar buscar al héroe. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<Hero> getHero(@PathVariable Integer id){
         log.info("Rest request search heroe by id: "+ id);
@@ -45,17 +44,16 @@ public class HeroController {
     }
 
     /**
-     * Listar heroes creados en la base de datos
-     * @return List<Heroe>
+     * Listar héroes creados en la base de datos.
+     * @return Una lista de héroes.
      */
-
     @GetMapping("")
-    @ApiOperation(value = "Buscar todos los heroes", response = List.class)
+    @Operation(summary = "Buscar todos los heroes", description = "Obtiene una lista de todos los héroes en la base de datos.")
     @ApiResponses(value= {
-            @ApiResponse(code = 200, message = "Héroes encontrados exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. La solicitud no es válida para listar los héroes."),
-            @ApiResponse(code = 404, message = "No fue posible listar los héroes, no fueron encontrados."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar listar los héroes. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroes encontrados exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. La solicitud no es válida para listar los héroes."),
+            @ApiResponse(responseCode = "404", description = "No fue posible listar los héroes, no fueron encontrados."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar listar los héroes. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<List<Hero>> getHeroes(){
         log.info("Rest request list heroes");
@@ -68,12 +66,12 @@ public class HeroController {
      * @return El héroe almacenado exitosamente.
      */
     @PostMapping()
-    @ApiOperation(value = "Agregar un nuevo héroe", response = Hero.class)
+    @Operation(summary = "Agregar un nuevo héroe", description = "Agrega un nuevo héroe a la base de datos.")
     @ApiResponses(value= {
-            @ApiResponse(code = 200, message = "Héroe almacenado exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. Asegúrate de proporcionar datos válidos para agregar un nuevo héroe."),
-            @ApiResponse(code = 404, message = "No fue posible almacenar el héroe en la base de datos."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar almacenar el héroe. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroe almacenado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. Asegúrate de proporcionar datos válidos para agregar un nuevo héroe."),
+            @ApiResponse(responseCode = "404", description = "No fue posible almacenar el héroe en la base de datos."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar almacenar el héroe. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<Hero> addHero(@RequestBody Hero hero){
         log.info("Rest request add new hero");
@@ -86,12 +84,12 @@ public class HeroController {
      * @return El héroe actualizado.
      */
     @PutMapping()
-    @ApiOperation(value = "Actualizar héroe", response = Hero.class)
+    @Operation(summary = "Actualizar héroe", description = "Actualiza un héroe en la base de datos.")
     @ApiResponses(value= {
-            @ApiResponse(code = 200, message = "Héroe actualizado exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. Asegúrate de proporcionar datos válidos para actualizar un héroe."),
-            @ApiResponse(code = 404, message = "No fue posible encontrar un héroe con el ID especificado."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar actualizar el héroe. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroe actualizado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. Asegúrate de proporcionar datos válidos para actualizar un héroe."),
+            @ApiResponse(responseCode = "404", description = "No fue posible encontrar un héroe con el ID especificado."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar actualizar el héroe. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<Hero> updateHero(@RequestBody Hero hero){
         log.info("Rest request update heroes");
@@ -99,17 +97,17 @@ public class HeroController {
     }
 
     /**
-     * Elimina un héroe de la base de datos por ID.
+     * Eliminar un héroe de la base de datos por ID.
      * @param id El ID del héroe que se va a eliminar.
      * @return ResponseEntity sin cuerpo con el código de respuesta apropiado.
      */
     @DeleteMapping("{id}")
-    @ApiOperation(value = "Eliminar héroe por ID", response = Hero.class)
+    @Operation(summary = "Eliminar héroe por ID", description = "Elimina un héroe de la base de datos por su ID.")
     @ApiResponses(value= {
-            @ApiResponse(code = 200, message = "Héroe eliminado exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. Asegúrate de proporcionar un ID válido para eliminar un héroe."),
-            @ApiResponse(code = 404, message = "No fue posible eliminar el héroe, no fue encontrado."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar eliminar el héroe. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroe eliminado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. Asegúrate de proporcionar un ID válido para eliminar un héroe."),
+            @ApiResponse(responseCode = "404", description = "No fue posible eliminar el héroe, no fue encontrado."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar eliminar el héroe. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<Void> deteleteHero(@PathVariable Integer id){
         log.info("Rest request delete heroe = {}", id);
@@ -123,12 +121,12 @@ public class HeroController {
      * @return Una lista de héroes que coinciden con el nombre especificado.
      */
     @GetMapping("/name")
-    @ApiOperation(value = "Buscar héroes por nombre", response = List.class)
+    @Operation(summary = "Buscar héroes por nombre", description = "Busca héroes en la base de datos por nombre.")
     @ApiResponses(value= {
-            @ApiResponse(code = 200, message = "Héroes encontrados exitosamente."),
-            @ApiResponse(code = 400, message = "Petición inválida. Asegúrate de proporcionar un nombre válido para buscar héroes."),
-            @ApiResponse(code = 404, message = "No existen héroes con ese nombre."),
-            @ApiResponse(code = 500, message = "Error interno para procesar respuesta. Se ha producido un error interno al intentar buscar héroes por nombre. Por favor, intenta nuevamente más tarde."),
+            @ApiResponse(responseCode = "200", description = "Héroes encontrados exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Petición inválida. Asegúrate de proporcionar un nombre válido para buscar héroes."),
+            @ApiResponse(responseCode = "404", description = "No existen héroes con ese nombre."),
+            @ApiResponse(responseCode = "500", description = "Error interno para procesar respuesta. Se ha producido un error interno al intentar buscar héroes por nombre. Por favor, intenta nuevamente más tarde."),
     })
     public ResponseEntity<List<Hero>> searchHeroes(@RequestParam String name){
         log.info("Rest request search heroes by name: {}", name);
